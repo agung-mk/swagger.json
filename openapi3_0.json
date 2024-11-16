@@ -1,0 +1,6884 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "This is a API documentation for Aemt Services, please read the documentation carefully before using the API.\n\nMore Information:\n- [WhatsApp Channel](https://whatsapp.com/channel/0029VaG1DsA2kNFtAcwamK13)\n- [Status](https://status.aemt.uk.to)\n- [Donate](https://sociabuzz.com/tioclkp02/give)\n- [Website](https://www.agungdev.xyz)",
+    "version": "1.0.0",
+    "title": "AgungDEV - APIs"
+  },
+  "servers": [
+    {
+      "url": "https://aemt.uk.to",
+      "description": "/srv 1"
+    },
+    {
+      "url": "https://btch.us.kg",
+      "description": "/srv 2"
+    },
+    {
+      "url": "https://api.tioo.eu.org",
+      "description": "/srv 3"
+    },
+    {
+      "url": "https://api.tioprm.eu.org",
+      "description": "/srv 4"
+    },
+    {
+      "url": "https://meitang.xyz",
+      "description": "/srv 5"
+    }
+  ],
+  "paths": {
+    "/openai": {
+      "get": {
+        "summary": "Openai AI",
+        "operationId": "get_chatGPT_completions_AI",
+        "tags": [
+          "AI"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/post/openai": {
+      "post": {
+        "summary": "AI Message Openai",
+        "operationId": "post_chatGPT_completions",
+        "tags": [
+          "AI"
+        ],
+        "requestBody": {
+          "description": "Text to be sent to OpenAI",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string",
+                    "description": "Text to be sent to OpenAI"
+                  }
+                },
+                "required": [
+                  "text"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean",
+                      "description": "Indicates if the request was successful"
+                    },
+                    "creator": {
+                      "type": "string",
+                      "description": "Creator of the response"
+                    },
+                    "result": {
+                      "type": "string",
+                      "description": "The generated response from OpenAI"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Illegal input received."
+          }
+        }
+      }
+    },
+    "/post/gpt-prompt": {
+      "post": {
+        "summary": "AI Openai With Prompt",
+        "operationId": "post_gpt_prompt",
+        "tags": [
+          "AI"
+        ],
+        "requestBody": {
+          "description": "Array of messages to be sent to GPT",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "messages": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "role": {
+                          "type": "string",
+                          "description": "Role of the message sender (e.g., 'user', 'assistant')"
+                        },
+                        "content": {
+                          "type": "string",
+                          "description": "Content of the message"
+                        }
+                      },
+                      "required": [
+                        "role",
+                        "content"
+                      ]
+                    }
+                  }
+                },
+                "required": [
+                  "messages"
+                ],
+                "example": {
+                  "messages": [
+                    {
+                      "role": "assistant",
+                      "content": "Hello! How are you today?"
+                    },
+                    {
+                      "role": "user",
+                      "content": "Hello, my name is Tio"
+                    },
+                    {
+                      "role": "assistant",
+                      "content": "Hello, Tio! How are you today?"
+                    },
+                    {
+                      "role": "user",
+                      "content": "Can you repeat my name?"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "boolean",
+                      "description": "Indicates if the request was successful"
+                    },
+                    "creator": {
+                      "type": "string",
+                      "description": "Creator of the response"
+                    },
+                    "result": {
+                      "type": "string",
+                      "description": "The generated response from GPT"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Please provide the messages in the request body."
+          },
+          "500": {
+            "description": "An error occurred during data fetching."
+          }
+        }
+      }
+    },
+    "/toanime": {
+      "get": {
+        "summary": "Convert Image To Anime",
+        "operationId": "get_image_toanime",
+        "tags": [
+          "AI"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "image",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UrlResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/dalle": {
+      "get": {
+        "summary": "Create Image With Dalle",
+        "operationId": "get_dall_e_image",
+        "tags": [
+          "AI"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/ai/text2img": {
+      "get": {
+        "summary": "Create Image With AI Text2img",
+        "operationId": "get_text2img_image_1",
+        "tags": [
+          "AI"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/v1/text2img": {
+      "get": {
+        "summary": "Create Image With Text2img V1",
+        "operationId": "get_text2img_image_2",
+        "tags": [
+          "AI"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/v2/text2img": {
+      "get": {
+        "summary": "Create Image With Text2img V2",
+        "operationId": "get_text2img_image_3",
+        "tags": [
+          "AI"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/v3/text2img": {
+      "get": {
+        "summary": "Create Image With Text2img V3",
+        "operationId": "get_text2img_image_5",
+        "tags": [
+          "AI"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/v4/text2img": {
+      "get": {
+        "summary": "Create Image With Text2img V4",
+        "operationId": "get_text2img_image_6",
+        "tags": [
+          "AI"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/v5/text2img": {
+      "get": {
+        "summary": "Create Image With Text2img V5",
+        "operationId": "get_text2img_image_7",
+        "tags": [
+          "AI"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/v6/text2img": {
+      "get": {
+        "summary": "Create Image With Text2img V6",
+        "operationId": "get_text2img_image_8",
+        "tags": [
+          "AI"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/openai-db": {
+      "get": {
+        "summary": "Openai AI With UserId",
+        "operationId": "get_chatGPT_completions_DB",
+        "tags": [
+          "AI"
+        ],
+        "parameters": [
+          {
+            "name": "user",
+            "in": "query",
+            "description": "User",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/prompt/gpt": {
+      "get": {
+        "summary": "AI Openai With Prompt",
+        "operationId": "get_chatGPT_completions_prompt",
+        "tags": [
+          "AI"
+        ],
+        "parameters": [
+          {
+            "name": "prompt",
+            "in": "query",
+            "description": "Prompt",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/gptgo": {
+      "get": {
+        "summary": "AI gptgo",
+        "operationId": "get_chatGPT_Go_completions",
+        "tags": [
+          "AI"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/blackbox": {
+      "get": {
+        "summary": "AI Blackbox",
+        "operationId": "get_chat_AI_blackbox_completions",
+        "tags": [
+          "AI"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/gpt4": {
+      "get": {
+        "summary": "AI gpt-4",
+        "operationId": "get_chatGPT_completions",
+        "tags": [
+          "AI"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/v2/gpt4": {
+      "get": {
+        "summary": "AI gpt-4 V2",
+        "operationId": "get_chatGPT_completions_ai",
+        "tags": [
+          "AI"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/v3/gpt4": {
+      "get": {
+        "summary": "AI gpt-4 V3",
+        "operationId": "get_chatGPT_completions_ai_3",
+        "tags": [
+          "AI"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/turbo": {
+      "get": {
+        "summary": "AI Openai Turbo",
+        "operationId": "get_chatGPT_completions_turbo",
+        "tags": [
+          "AI"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/v2/turbo": {
+      "get": {
+        "summary": "AI Openai Turbo V2",
+        "operationId": "get_chatGPT_completions_turbo2",
+        "tags": [
+          "AI"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/v3/turbo": {
+      "get": {
+        "summary": "AI Openai Turbo V3",
+        "operationId": "get_chatGPT_completions_turbo3",
+        "tags": [
+          "AI"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/gemini": {
+      "get": {
+        "summary": "AI Gemini",
+        "operationId": "get_chatGPT_completions_gemini",
+        "tags": [
+          "AI"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/bard": {
+      "get": {
+        "summary": "AI Bard",
+        "operationId": "get_chatGPT_bard_completions",
+        "tags": [
+          "AI"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/bardimg": {
+      "get": {
+        "summary": "AI Bard Image",
+        "operationId": "get_bardImg_response",
+        "tags": [
+          "AI"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "Image",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/bingai": {
+      "get": {
+        "summary": "AI Bing",
+        "operationId": "get_chat_Ai_bing_completions",
+        "tags": [
+          "AI"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/bingimg": {
+      "get": {
+        "summary": "AI Bing Image",
+        "operationId": "get_chat_ai_bing_image_completions",
+        "tags": [
+          "AI"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/lepton": {
+      "get": {
+        "summary": "AI Lepton",
+        "operationId": "get_ai_lepton",
+        "tags": [
+          "AI"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/ai/c-ai": {
+      "get": {
+        "summary": "AI Character",
+        "operationId": "get_chatGPT_ai_character",
+        "tags": [
+          "AI"
+        ],
+        "parameters": [
+          {
+            "name": "prompt",
+            "in": "query",
+            "description": "Prompt",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/stablediffusion": {
+      "get": {
+        "summary": "Create Image With Stablediffusion",
+        "operationId": "get_stablediffusion_image",
+        "tags": [
+          "AI"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/whatmusic": {
+      "get": {
+        "summary": "AI Song Title Finder",
+        "operationId": "get_info_title_music",
+        "tags": [
+          "AI"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "music",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UrlResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/nsfwdetector": {
+      "get": {
+        "summary": "AI Nsfw Detector",
+        "operationId": "get_data_content_porn",
+        "tags": [
+          "AI"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "url image",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UrlResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/simi": {
+      "get": {
+        "summary": "SimSimi API",
+        "operationId": "get_json_search_simi",
+        "tags": [
+          "AI"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/tts/tiktok": {
+      "get": {
+        "summary": "Generate TikTok TTS",
+        "operationId": "get_data_ttstiktok",
+        "tags": [
+          "Downloader"
+        ],
+        "parameters": [
+          {
+            "name": "model",
+            "in": "query",
+            "description": "Model Ex: englishUS",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "voice",
+            "in": "query",
+            "description": "Voice Ex: female",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text TTS",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/tts/tiktok/endpoint": {
+      "get": {
+        "summary": "Get List Endpoint Model TTS",
+        "operationId": "get_json_tts_model",
+        "tags": [
+          "Downloader"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    },
+    "/download/bingjson": {
+      "get": {
+        "summary": "Get JSON Bing Random Image",
+        "operationId": "get_download_bing_json",
+        "tags": [
+          "Downloader"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    },
+    "/download/bing": {
+      "get": {
+        "summary": "Get Bing Random Image",
+        "operationId": "get_download_image",
+        "tags": [
+          "Downloader"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    },
+    "/download/storyanime": {
+      "get": {
+        "summary": "Download Story Anime",
+        "operationId": "get_download_story_anime",
+        "tags": [
+          "Downloader"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    },
+    "/download/tiktokslide": {
+      "get": {
+        "summary": "Download TikTok Slide Photo",
+        "operationId": "get_download_tiktok_slide",
+        "tags": [
+          "Downloader"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "Url",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UrlResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/soundcloud": {
+      "get": {
+        "summary": "Download Soundcpoud Audio",
+        "operationId": "get_download_json_scd",
+        "tags": [
+          "Downloader"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "Url",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UrlResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/filmapikdl": {
+      "get": {
+        "summary": "Download  Filmapik",
+        "operationId": "get_download_json_flm",
+        "tags": [
+          "Downloader"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "Url",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UrlResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/gore": {
+      "get": {
+        "summary": "Download Gore",
+        "operationId": "get_download_json_gore",
+        "tags": [
+          "Downloader"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    },
+    "/randomgore": {
+      "get": {
+        "summary": "Download Random Gore",
+        "operationId": "get_download_json_gore_1",
+        "tags": [
+          "Downloader"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    },
+    "/download/threads": {
+      "get": {
+        "summary": "Download Threada Video / Photo",
+        "operationId": "get_download_threadsdl",
+        "tags": [
+          "Downloader"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "Url",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UrlResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/download/pindl": {
+      "get": {
+        "summary": "Downloader Pinterest",
+        "operationId": "get_download_pinterest",
+        "tags": [
+          "Downloader"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "Url",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UrlResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/download/aio": {
+      "get": {
+        "summary": "Downloader AIO",
+        "operationId": "get_download_aio",
+        "tags": [
+          "Downloader"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "Url",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UrlResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/download/ttdl": {
+      "get": {
+        "summary": "Downloader TikTok",
+        "operationId": "get_download_ttdl",
+        "tags": [
+          "Downloader"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "Url",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UrlResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/download/v2/ttdl": {
+      "get": {
+        "summary": "Downloader TikTok V2",
+        "operationId": "get_download_ttdl_2",
+        "tags": [
+          "Downloader"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "Url",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UrlResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/download/tikdl": {
+      "get": {
+        "summary": "Downloader TikTok V3",
+        "operationId": "get_download_tikdl",
+        "tags": [
+          "Downloader"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "Url",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UrlResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/download/igdl": {
+      "get": {
+        "summary": "Downloader Instagram Video / Image",
+        "operationId": "get_download_igdl",
+        "tags": [
+          "Downloader"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "Url",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UrlResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/download/igstalk": {
+      "get": {
+        "summary": "Stalk Instagram Via Username",
+        "operationId": "get_download_data_igstalk",
+        "tags": [
+          "Downloader"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "description": "Username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/download/tiktokdl": {
+      "get": {
+        "summary": "Download TikTok V4",
+        "operationId": "get_download_tiktokdl",
+        "tags": [
+          "Downloader"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "Url",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UrlResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/download/asupantt": {
+      "get": {
+        "summary": "Downloader Asupan TikTok",
+        "operationId": "get_download_asupan_tt",
+        "tags": [
+          "Downloader"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "description": "Uasername",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/lirik": {
+      "get": {
+        "summary": "Downloader Lyrics",
+        "operationId": "get_download_lirik",
+        "tags": [
+          "Downloader"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/mediafire": {
+      "get": {
+        "summary": "Downloader Mediafire",
+        "operationId": "get_download_mediafire",
+        "tags": [
+          "Downloader"
+        ],
+        "parameters": [
+          {
+            "name": "link",
+            "in": "query",
+            "description": "Link",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UrlResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/asupandouyin": {
+      "get": {
+        "summary": "Downloader Asupan Video From Douyin",
+        "operationId": "get_download_asupandouyin",
+        "tags": [
+          "Downloader"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    },
+    "/asupan": {
+      "get": {
+        "summary": "Downloader Asupan Video",
+        "operationId": "get_download_asupan",
+        "tags": [
+          "Downloader"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    },
+    "/download/capcut": {
+      "get": {
+        "summary": "Downloader CapCut",
+        "operationId": "get_download_capcut",
+        "tags": [
+          "Downloader"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "Url",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UrlResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/download/tiktokstalk": {
+      "get": {
+        "summary": "Downloader TikTok Stalk",
+        "operationId": "get_download_tiktok_tiktokstalk",
+        "tags": [
+          "Downloader"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "description": "Username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/download/youtubestalk": {
+      "get": {
+        "summary": "Downloader YouTube Stalk",
+        "operationId": "get_download_data_youtubestalk",
+        "tags": [
+          "Downloader"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/download/fbdl": {
+      "get": {
+        "summary": "Downloader Facebook",
+        "operationId": "get_download_fbdl",
+        "tags": [
+          "Downloader"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "Url",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UrlResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/download/fbdown": {
+      "get": {
+        "summary": "Downloader YouTube V2",
+        "operationId": "get_download_fbown",
+        "tags": [
+          "Downloader"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "Url",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UrlResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/download/gdrive": {
+      "get": {
+        "summary": "Downloader Google Drive",
+        "operationId": "get_download_gdrive",
+        "tags": [
+          "Downloader"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "Url",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UrlResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/download/douyinslide": {
+      "get": {
+        "summary": "Downloader Douyin Photo",
+        "operationId": "get_download_douyinslide",
+        "tags": [
+          "Downloader"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "Url",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UrlResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/download/douyin": {
+      "get": {
+        "summary": "Downloader Douyin Video",
+        "operationId": "get_download_douyin",
+        "tags": [
+          "Downloader"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "Url",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UrlResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/download/ytdl": {
+      "get": {
+        "summary": "Downloader YouTube",
+        "operationId": "get_download_ytdl",
+        "tags": [
+          "Downloader"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "Url",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UrlResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/download/twtdl": {
+      "get": {
+        "summary": "Downloader Twitter",
+        "operationId": "get_download_twdl",
+        "tags": [
+          "Downloader"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "Url",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UrlResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/download/likee": {
+      "get": {
+        "summary": "Downloader likee",
+        "operationId": "get_download_likee",
+        "tags": [
+          "Downloader"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "Url",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UrlResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/sshp": {
+      "get": {
+        "summary": "Capture Website Format Phone",
+        "operationId": "get_screenshot_hp",
+        "tags": [
+          "Tools"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "Ex: https://google.com",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/sspc": {
+      "get": {
+        "summary": "Capture Website Format PC",
+        "operationId": "get_screenshot_pc",
+        "tags": [
+          "Tools"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "Ex: https://google.com",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/sstab": {
+      "get": {
+        "summary": "Capture Website Format Tab",
+        "operationId": "get_screenshot_tab",
+        "tags": [
+          "Tools"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "Ex: https://google.com",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/ttp": {
+      "get": {
+        "summary": "Create TTP Canvas",
+        "operationId": "get_canvas_ttp",
+        "tags": [
+          "Canvas"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/attp": {
+      "get": {
+        "summary": "Create ATTP gif",
+        "operationId": "get_canvas_attp",
+        "tags": [
+          "Canvas"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/gif": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/welcome": {
+      "get": {
+        "summary": "Create Welcome Message Photo",
+        "operationId": "get_canvas_welcome",
+        "tags": [
+          "Canvas"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "gcname",
+            "in": "query",
+            "description": "GC Name",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ppgc",
+            "in": "query",
+            "description": "image",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "member",
+            "in": "query",
+            "description": "Member",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pp",
+            "in": "query",
+            "description": "image",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "bg",
+            "in": "query",
+            "description": "Background",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/welcome2": {
+      "get": {
+        "summary": "Create Welcome 2 Message Photo",
+        "operationId": "get_canvas_welcome2",
+        "tags": [
+          "Canvas"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "gcname",
+            "in": "query",
+            "description": "GC Name",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ppgc",
+            "in": "query",
+            "description": "image",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "member",
+            "in": "query",
+            "description": "Member",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pp",
+            "in": "query",
+            "description": "image",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "bg",
+            "in": "query",
+            "description": "Background",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/welcome3": {
+      "get": {
+        "summary": "Create Welcome 3 Message Photo",
+        "operationId": "get_canvas_welcome3",
+        "tags": [
+          "Canvas"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "gcname",
+            "in": "query",
+            "description": "GC Name",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ppgc",
+            "in": "query",
+            "description": "image",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "member",
+            "in": "query",
+            "description": "Member",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pp",
+            "in": "query",
+            "description": "image",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "bg",
+            "in": "query",
+            "description": "Background",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/goodbye": {
+      "get": {
+        "summary": "Create Leave Message Photo",
+        "operationId": "get_canvas_goodbye",
+        "tags": [
+          "Canvas"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "gcname",
+            "in": "query",
+            "description": "GC Name",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ppgc",
+            "in": "query",
+            "description": "image",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "member",
+            "in": "query",
+            "description": "Member",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pp",
+            "in": "query",
+            "description": "image",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "bg",
+            "in": "query",
+            "description": "Background",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/hacker": {
+      "get": {
+        "summary": "Create Hacker Image Canvas",
+        "operationId": "get_canvas_hacker",
+        "tags": [
+          "Canvas"
+        ],
+        "parameters": [
+          {
+            "name": "link",
+            "in": "query",
+            "description": "image",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/hacker2": {
+      "get": {
+        "summary": "Create Hacker Image Canvas V2",
+        "operationId": "get_canvas_hacker2",
+        "tags": [
+          "Canvas"
+        ],
+        "parameters": [
+          {
+            "name": "link",
+            "in": "query",
+            "description": "image",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/circle": {
+      "get": {
+        "summary": "Create Circle Image",
+        "operationId": "get_canvas_circle",
+        "tags": [
+          "Canvas"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "image url",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/png": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/beautiful": {
+      "get": {
+        "summary": "Create Beautiful Image Canvas",
+        "operationId": "get_canvas_beautiful",
+        "tags": [
+          "Canvas"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "image url",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/png": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/blur": {
+      "get": {
+        "summary": "Convert Image To Blur Canvas",
+        "operationId": "get_canvas_blur",
+        "tags": [
+          "Canvas"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "image url",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/png": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/facepalm": {
+      "get": {
+        "summary": "Convert Imagw To Face Palm Canvas",
+        "operationId": "get_canvas_facepalm",
+        "tags": [
+          "Canvas"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "image url",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/png": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/rainbow": {
+      "get": {
+        "summary": "Convert image To Rainbow Canvas",
+        "operationId": "get_canvas_rainbow",
+        "tags": [
+          "Canvas"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "image url",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/png": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/invert": {
+      "get": {
+        "summary": "Convert Image To Invert Canvas",
+        "operationId": "get_canvas_invert",
+        "tags": [
+          "Canvas"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "image url",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/png": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/wanted": {
+      "get": {
+        "summary": "Convert Image To Wanted Canvas",
+        "operationId": "get_canvas_wanted",
+        "tags": [
+          "Canvas"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "image url",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/png": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/wasted": {
+      "get": {
+        "summary": "Convert Image To Wasted Canvas",
+        "operationId": "get_canvas_wasted",
+        "tags": [
+          "Canvas"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "image url",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/png": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/trigger": {
+      "get": {
+        "summary": "Convert Image To Trigger Canvas",
+        "operationId": "get_canvas_trigger",
+        "tags": [
+          "Canvas"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "image url",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/gif": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/darkness": {
+      "get": {
+        "summary": "Convert Image To Darkness Canvas",
+        "operationId": "get_canvas_darkness",
+        "tags": [
+          "Canvas"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "Image",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "no",
+            "in": "query",
+            "description": "number 1-100",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/png": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/pixelate": {
+      "get": {
+        "summary": "Convert Image To Pixelate Canvas",
+        "operationId": "get_canvas_pixelate",
+        "tags": [
+          "Canvas"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "Image",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "amount",
+            "in": "query",
+            "description": "number 0-100",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/png": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/emojimix": {
+      "get": {
+        "summary": "Create EmojiMix",
+        "operationId": "get_canvas_emojimix",
+        "tags": [
+          "Canvas"
+        ],
+        "parameters": [
+          {
+            "name": "emoji1",
+            "in": "query",
+            "description": "Emoji 1",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "emoji2",
+            "in": "query",
+            "description": "Emoji 2",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/png": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/resize": {
+      "get": {
+        "summary": "Convert Image Resize",
+        "operationId": "get_canvas_resize",
+        "tags": [
+          "Canvas"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "Image",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "width",
+            "in": "query",
+            "description": "number",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "height",
+            "in": "query",
+            "description": "number",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/png": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/gay": {
+      "get": {
+        "summary": "Convert Image To Gay Canvas",
+        "operationId": "get_canvas_gay",
+        "tags": [
+          "Canvas"
+        ],
+        "parameters": [
+          {
+            "name": "link",
+            "in": "query",
+            "description": "image",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "nama",
+            "in": "query",
+            "description": "Nama",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "persen",
+            "in": "query",
+            "description": "Persen",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/jadigta": {
+      "get": {
+        "summary": "Convert Image To Gta Canvas",
+        "operationId": "get_image_togta",
+        "tags": [
+          "Canvas"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "image",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/quotely": {
+      "get": {
+        "summary": "Convert Quote Message To Webp",
+        "operationId": "get_canvas_quote",
+        "tags": [
+          "Canvas"
+        ],
+        "parameters": [
+          {
+            "name": "avatar",
+            "in": "query",
+            "description": "Url",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/remini": {
+      "get": {
+        "summary": "Convert Image Remini",
+        "operationId": "get_canvas_remini",
+        "tags": [
+          "Canvas"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "Image",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "resolusi",
+            "in": "query",
+            "description": "Resolution available 2, 4, 6,8,16",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UrlResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/removebg": {
+      "get": {
+        "summary": "Convert Image Remove Background",
+        "operationId": "get_image_remover",
+        "tags": [
+          "Canvas"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "Image",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UrlResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/carbon": {
+      "get": {
+        "summary": "Convert Text To Image Carbon",
+        "operationId": "get_image_carbon",
+        "tags": [
+          "Canvas"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/converter/zombie": {
+      "get": {
+        "summary": "Convert Image To Zombie Canvas",
+        "operationId": "get_canvas_zombie",
+        "tags": [
+          "Canvas"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "image",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/rankup": {
+      "get": {
+        "summary": "Convert Image To Rank Canvas",
+        "operationId": "get_canvas_rankup",
+        "tags": [
+          "Canvas"
+        ],
+        "parameters": [
+          {
+            "name": "avatar",
+            "in": "query",
+            "description": "image",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/png": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/findsong": {
+      "get": {
+        "summary": "Search Song Title",
+        "operationId": "get_search_song",
+        "tags": [
+          "Search"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/bukalapak": {
+      "get": {
+        "summary": "Search Iyem From Bukalapak.com",
+        "operationId": "get_search_shop",
+        "tags": [
+          "Search"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/styletext": {
+      "get": {
+        "summary": "Search Text Style",
+        "operationId": "get_search_styletext",
+        "tags": [
+          "Search"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/similarband": {
+      "get": {
+        "summary": "Search Similar Band",
+        "operationId": "get_search_band_info",
+        "tags": [
+          "Search"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/kalender": {
+      "get": {
+        "summary": "Search Holiday Calendar",
+        "operationId": "get_search_kelender",
+        "tags": [
+          "Search"
+        ],
+        "parameters": [
+          {
+            "name": "bulan",
+            "in": "query",
+            "description": "Bulan",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tahun",
+            "in": "query",
+            "description": "Tahun",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/weather": {
+      "get": {
+        "summary": "Search Information Weather",
+        "operationId": "get_json_search_weather",
+        "tags": [
+          "Search"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "City",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/jarak": {
+      "get": {
+        "summary": "Find Information on the Distance from City A to B",
+        "operationId": "get_download_jarak",
+        "tags": [
+          "Search"
+        ],
+        "parameters": [
+          {
+            "name": "dari",
+            "in": "query",
+            "description": "Dari",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ke",
+            "in": "query",
+            "description": "ke",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/filmapiksearch": {
+      "get": {
+        "summary": "Search Filmapik Video Details",
+        "operationId": "get_json_search_flm",
+        "tags": [
+          "Search"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/otakudesusearch": {
+      "get": {
+        "summary": "Find Information Otakudesu",
+        "operationId": "get_json_search_otaku",
+        "tags": [
+          "Search"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/standings": {
+      "get": {
+        "summary": "Looking for information Football schedule information",
+        "operationId": "get_json_search_bola",
+        "tags": [
+          "Search"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "indonesia, italia, inggris, dll",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/surah": {
+      "get": {
+        "summary": "Search Surah Al-quran",
+        "operationId": "get_surah",
+        "tags": [
+          "Search"
+        ],
+        "parameters": [
+          {
+            "name": "no",
+            "in": "query",
+            "description": "number",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/tafsirsurah": {
+      "get": {
+        "summary": "Search Tafsir Al-quran",
+        "operationId": "get_tafsirsurah",
+        "tags": [
+          "Search"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Ex : Adam",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/ringtone": {
+      "get": {
+        "summary": "Search Ringtone",
+        "operationId": "get_ringtone",
+        "tags": [
+          "Search"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Ex : Iphone",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/cariresep": {
+      "get": {
+        "summary": "Search Cooking Recipes",
+        "operationId": "get_json_search_resep",
+        "tags": [
+          "Search"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/bacaresep": {
+      "get": {
+        "summary": "Search Cooking Recipes Detail",
+        "operationId": "get_json_search_resep_4",
+        "tags": [
+          "Search"
+        ],
+        "parameters": [
+          {
+            "name": "link",
+            "in": "query",
+            "description": "Link",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/caribacaresep": {
+      "get": {
+        "summary": "Search Cooking Recipes Detail Info",
+        "operationId": "get_json_search_61",
+        "tags": [
+          "Search"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/pinterest": {
+      "get": {
+        "summary": "Search Pinterest Image",
+        "operationId": "get_json_search_pin",
+        "tags": [
+          "Search"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/happymod": {
+      "get": {
+        "summary": "Search Happy Mod Apk",
+        "operationId": "get_json_search_mod",
+        "tags": [
+          "Search"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/searchmod": {
+      "get": {
+        "summary": "Search Mod Apk",
+        "operationId": "get_json_search_smod",
+        "tags": [
+          "Search"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/dlapk": {
+      "get": {
+        "summary": "Search Download Apk",
+        "operationId": "get_json_search_apk",
+        "tags": [
+          "Search"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "Url",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/jadwaltv": {
+      "get": {
+        "summary": "Search Indonesian Television Schedule",
+        "operationId": "get_json_search_tv_s",
+        "tags": [
+          "Search"
+        ],
+        "parameters": [
+          {
+            "name": "tv",
+            "in": "query",
+            "description": "TV",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/googlesearch": {
+      "get": {
+        "summary": "Search Google Engine",
+        "operationId": "get_search_google",
+        "tags": [
+          "Search"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Ex: Indonesia",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/gimage": {
+      "get": {
+        "summary": "Search Image From Google",
+        "operationId": "get_image_sarch",
+        "tags": [
+          "Search"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/googleimage": {
+      "get": {
+        "summary": "Search JSON Image From Google",
+        "operationId": "get_json_search_gm_img",
+        "tags": [
+          "Search"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/wallpaper": {
+      "get": {
+        "summary": "Search Wallpaper",
+        "operationId": "get_image_search",
+        "tags": [
+          "Search"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/pinimg": {
+      "get": {
+        "summary": "Search Pinterest Image",
+        "operationId": "search_pin_image",
+        "tags": [
+          "Search"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/chord": {
+      "get": {
+        "summary": "Search Music Chords",
+        "operationId": "get_music_chord",
+        "tags": [
+          "Search"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "title",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/gempa": {
+      "get": {
+        "summary": "Search Earthquake Info",
+        "operationId": "get_json_search_gempa",
+        "tags": [
+          "Search"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    },
+    "/turnbackhoax": {
+      "get": {
+        "summary": "Search News Turnbackhoax Info",
+        "operationId": "get_json_search_hoax",
+        "tags": [
+          "Search"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    },
+    "/cnn": {
+      "get": {
+        "summary": "Search News CNN Info",
+        "operationId": "get JSON",
+        "tags": [
+          "Search"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    },
+    "/liputan6": {
+      "get": {
+        "summary": "Search News Liputan 6 Info",
+        "operationId": "get_json_search_liputan",
+        "tags": [
+          "Search"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    },
+    "/cnbindonesia": {
+      "get": {
+        "summary": "Search News Cnb Info",
+        "operationId": "get_json_search_cnb",
+        "tags": [
+          "Search"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    },
+    "/kompas": {
+      "get": {
+        "summary": "Search News Kompas Info",
+        "operationId": "get_json_search_kompas",
+        "tags": [
+          "Search"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    },
+    "/antaranews": {
+      "get": {
+        "summary": "Search News Antarnews Info",
+        "operationId": "get_json_search_antara",
+        "tags": [
+          "Search"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    },
+    "/pixiv": {
+      "get": {
+        "summary": "",
+        "operationId": "get_json_search_pixiv",
+        "tags": [
+          "Search"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/nsfwpixiv": {
+      "get": {
+        "summary": "Search Pixiv NSFW",
+        "operationId": "get_json_search_pixiv_nsfw",
+        "tags": [
+          "Search"
+        ],
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/pixivdl": {
+      "get": {
+        "summary": "Search And Download Pixiv",
+        "operationId": "get_json_search_pixiv_dl",
+        "tags": [
+          "Search"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "pid",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ext",
+            "in": "query",
+            "description": "Example: .png, .jpg",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/ffstalk": {
+      "get": {
+        "summary": "Search Username From Id",
+        "operationId": "get_data_freefire",
+        "tags": [
+          "Search"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/groupwa": {
+      "get": {
+        "summary": "Search Link Group From Query",
+        "operationId": "get_link_group_on_internet",
+        "tags": [
+          "Search"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Subject",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/jadwalsholat": {
+      "get": {
+        "summary": "Search Prayer Schedule",
+        "operationId": "get_jadwal_internet",
+        "tags": [
+          "Search"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Subject",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/tiktoksearch": {
+      "get": {
+        "summary": "Search TikTok Trend",
+        "operationId": "get_data_from_tiktok",
+        "tags": [
+          "Search"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Subject",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/ghstalk": {
+      "get": {
+        "summary": "Search Github User Info From Username ",
+        "operationId": "get_data_github",
+        "tags": [
+          "Search"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "description": "Username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/npmjs": {
+      "get": {
+        "summary": "Search Npmjs User Info From Username ",
+        "operationId": "get_data_npmjs",
+        "tags": [
+          "Search"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "Name NPM",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/whois": {
+      "get": {
+        "summary": "Search Domain Whois Data Info",
+        "operationId": "get_data_whois",
+        "tags": [
+          "Tools"
+        ],
+        "parameters": [
+          {
+            "name": "domain",
+            "in": "query",
+            "description": "Ex: qq.com",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/v2/whois": {
+      "get": {
+        "summary": "Search Domain Whois Data Info V2",
+        "operationId": "get_data_whois_v2",
+        "tags": [
+          "Tools"
+        ],
+        "parameters": [
+          {
+            "name": "domain",
+            "in": "query",
+            "description": "Ex: qq.com",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/v3/whois": {
+      "get": {
+        "summary": "Search Domain Whois Data Info V3",
+        "operationId": "get_data_whois_v3",
+        "tags": [
+          "Tools"
+        ],
+        "parameters": [
+          {
+            "name": "domain",
+            "in": "query",
+            "description": "Ex: qq.com",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/tld/whois": {
+      "get": {
+        "summary": "Search Domain Whois Data Info tld",
+        "operationId": "get_data_whois_tld",
+        "tags": [
+          "Tools"
+        ],
+        "parameters": [
+          {
+            "name": "domain",
+            "in": "query",
+            "description": "Ex: .com, .org, .me",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/ip/whois": {
+      "get": {
+        "summary": "Search Domain Whois Data Info IP",
+        "operationId": "get_data_ip_whois",
+        "tags": [
+          "Tools"
+        ],
+        "parameters": [
+          {
+            "name": "ip",
+            "in": "query",
+            "description": "Ex: 112.90.150.204",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/iplocation": {
+      "get": {
+        "summary": "Search Domain Whois Data Info Ip Location",
+        "operationId": "get_data_ip_location",
+        "tags": [
+          "Tools"
+        ],
+        "parameters": [
+          {
+            "name": "ip",
+            "in": "query",
+            "description": "Ex: 112.90.150.204",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/subdomain": {
+      "get": {
+        "summary": "Search Domain Subdomainfinder",
+        "operationId": "get_data_subdomain_finder_4",
+        "tags": [
+          "Tools"
+        ],
+        "parameters": [
+          {
+            "name": "domain",
+            "in": "query",
+            "description": "Ex: google.com",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/v2/subdomain": {
+      "get": {
+        "summary": "Search Domain Subdomainfinder V2",
+        "operationId": "get_data_subdomain_finder",
+        "tags": [
+          "Tools"
+        ],
+        "parameters": [
+          {
+            "name": "domain",
+            "in": "query",
+            "description": "Ex: tioo.eu.org",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/dnslookup": {
+      "get": {
+        "summary": "Search Domain Dns Lookup",
+        "operationId": "get_data_dns",
+        "tags": [
+          "Tools"
+        ],
+        "parameters": [
+          {
+            "name": "domain",
+            "in": "query",
+            "description": "Ex: google.com",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/ssl/certificate": {
+      "get": {
+        "summary": "Search Domain Ssl Certificate",
+        "operationId": "get_data_ssl",
+        "tags": [
+          "Tools"
+        ],
+        "parameters": [
+          {
+            "name": "domain",
+            "in": "query",
+            "description": "Ex: aemt.uk.to",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/ssl/sslchecker": {
+      "get": {
+        "summary": "Search Domain Ss Checker",
+        "operationId": "get_data_ssl_c2",
+        "tags": [
+          "Tools"
+        ],
+        "parameters": [
+          {
+            "name": "domain",
+            "in": "query",
+            "description": "Ex: aemt.uk.to",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/expireddomain": {
+      "get": {
+        "summary": "Search Domain Expired Data",
+        "operationId": "get_data_expired_domain",
+        "tags": [
+          "Tools"
+        ],
+        "parameters": [
+          {
+            "name": "domain",
+            "in": "query",
+            "description": "Ex: google.com",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/speedweb": {
+      "get": {
+        "summary": "Search Web Ping Information",
+        "operationId": "get_data_speedweb",
+        "tags": [
+          "Tools"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "Ex: google.com",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/emailchecker": {
+      "get": {
+        "summary": "Search Email Information",
+        "operationId": "get_data_emailchecker",
+        "tags": [
+          "Tools"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "description": "Ex: jhondhue@gmail.com",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/proxy": {
+      "get": {
+        "summary": "Proxy Url",
+        "operationId": "get_data_fetcher_proxy",
+        "tags": [
+          "Tools"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "Ex: https://google.com",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/short/btch": {
+      "get": {
+        "summary": "Short Url BTCH",
+        "operationId": "get_json_short_btch",
+        "tags": [
+          "Short"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "Url",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UrlResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/tinyurl": {
+      "get": {
+        "summary": "Short Url Tinyurl",
+        "operationId": "get_json_short_1",
+        "tags": [
+          "Short"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "Url",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UrlResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/isgd": {
+      "get": {
+        "summary": "Short Url Isgd",
+        "operationId": "get_json_shor_3t",
+        "tags": [
+          "Short"
+        ],
+        "parameters": [
+          {
+            "name": "link",
+            "in": "query",
+            "description": "Link",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "": {
+                "schema": {
+                  "$ref": "#/components/schemas/UrlResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/short/vurl": {
+      "get": {
+        "summary": "Short Url Vurl",
+        "operationId": "get_json_short_4",
+        "tags": [
+          "Short"
+        ],
+        "parameters": [
+          {
+            "name": "link",
+            "in": "query",
+            "description": "Link",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UrlResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/vgd": {
+      "get": {
+        "summary": "Short Url Vgd",
+        "operationId": "get_json_short_5",
+        "tags": [
+          "Short"
+        ],
+        "parameters": [
+          {
+            "name": "link",
+            "in": "query",
+            "description": "Link",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UrlResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/ppcp": {
+      "get": {
+        "summary": "Get Random Profile Couple",
+        "operationId": "get_image_random_ppcp",
+        "tags": [
+          "Random"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    },
+    "/china": {
+      "get": {
+        "summary": "Get Image Random China",
+        "operationId": "get_image_random_cn",
+        "tags": [
+          "Random"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    },
+    "/vietnam": {
+      "get": {
+        "summary": "Get Image Random Vietnam",
+        "operationId": "get_image_random",
+        "tags": [
+          "Random"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    },
+    "/thailand": {
+      "get": {
+        "summary": "Get Image Random Thailand",
+        "operationId": "get_image_random_th",
+        "tags": [
+          "Random"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    },
+    "/indonesia": {
+      "get": {
+        "summary": "Get Image Random Indomesia",
+        "operationId": "get_image_random_id",
+        "tags": [
+          "Random"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    },
+    "/korea": {
+      "get": {
+        "summary": "Get Image Random Korea",
+        "operationId": "get_image_random_kr",
+        "tags": [
+          "Random"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    },
+    "/japan": {
+      "get": {
+        "summary": "Get Image Random Japan",
+        "operationId": "get_image_random_jp",
+        "tags": [
+          "Random"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    },
+    "/malaysia": {
+      "get": {
+        "summary": "Get Image Random Malaysia",
+        "operationId": "get_image_random_my",
+        "tags": [
+          "Random"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    },
+    "/shinobu": {
+      "get": {
+        "summary": "Get Image Random Shinobu",
+        "operationId": "get_image_random_sbu",
+        "tags": [
+          "Random"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    },
+    "/waifu": {
+      "get": {
+        "summary": "Get Image Random Waifu",
+        "operationId": "get_image_random_wfu",
+        "tags": [
+          "Random"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    },
+    "/neko": {
+      "get": {
+        "summary": "Get Image Random Neko",
+        "operationId": "get_image_random_nk",
+        "tags": [
+          "Random"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    },
+    "/hubbleimg": {
+      "get": {
+        "summary": "Get Image Random Hubble Image",
+        "operationId": "get_image_random_hbi",
+        "tags": [
+          "Random"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    },
+    "/loli": {
+      "get": {
+        "summary": "Get Image Random Loli",
+        "operationId": "get_image_random_loli",
+        "tags": [
+          "Random"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    },
+    "/tebakgambar": {
+      "get": {
+        "summary": "Game Tebak Gambar",
+        "operationId": "get_json_tebakgambar",
+        "tags": [
+          "Game"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    },
+    "/susunkata": {
+      "get": {
+        "summary": "Game Susunkata",
+        "operationId": "get_json_susunkata",
+        "tags": [
+          "Game"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    },
+    "/tebakbendera": {
+      "get": {
+        "summary": "Game Tebak Bendera",
+        "operationId": "get_json_tebakbendera",
+        "tags": [
+          "Game"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    },
+    "/tebakgame": {
+      "get": {
+        "summary": "Game Tebak Game",
+        "operationId": "get_json_tebakgame",
+        "tags": [
+          "Game"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    },
+    "/tebakkata": {
+      "get": {
+        "summary": "Game Tebak Kata",
+        "operationId": "get_json_tebakkata",
+        "tags": [
+          "Game"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    },
+    "/tebaklirik": {
+      "get": {
+        "summary": "Game Tebak Lirik",
+        "operationId": "get_json_tebaklirik",
+        "tags": [
+          "Game"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    },
+    "/tebaklagu": {
+      "get": {
+        "summary": "Game Tebak Lagu",
+        "operationId": "get_json_tebaklagu",
+        "tags": [
+          "Game"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    },
+    "/tebakkimia": {
+      "get": {
+        "summary": "Game Tebak Kimia",
+        "operationId": "get_json_tebakkimia",
+        "tags": [
+          "Game"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    },
+    "/tempmail": {
+      "get": {
+        "summary": "Get Random Email Temporary",
+        "operationId": "get_data_random_mail",
+        "tags": [
+          "Tempmail"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    },
+    "/getmail": {
+      "get": {
+        "summary": "Get Content Email Temporary",
+        "operationId": "get_message_tempmail",
+        "tags": [
+          "Tempmail"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "description": "Data Email Here",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/base64": {
+      "get": {
+        "summary": "Convert Text To Base64",
+        "operationId": "base64_data_encrypt",
+        "tags": [
+          "Base64"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/debase64": {
+      "get": {
+        "summary": "Decrypt Base64 To Text",
+        "operationId": "base64_data_decrypt",
+        "tags": [
+          "Base64"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "base64 text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/etobinary": {
+      "get": {
+        "summary": "Convert Text To Binary",
+        "operationId": "base64_data_etobinary",
+        "tags": [
+          "Base64"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "description": "text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/binaryttext": {
+      "get": {
+        "summary": "Convert Binary To Text",
+        "operationId": "base64_data_binary",
+        "tags": [
+          "Base64"
+        ],
+        "parameters": [
+          {
+            "name": "binary",
+            "in": "query",
+            "description": "binary text",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/IllegalInput"
+          }
+        }
+      }
+    },
+    "/api/upload.php": {
+      "post": {
+        "summary": "File Hosting",
+        "operationId": "upload_file",
+        "tags": [
+          "Uploader"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "File to upload"
+                  }
+                },
+                "required": [
+                  "file"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "File uploaded successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "No file uploaded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "example": "No file uploaded."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api": {
+      "get": {
+        "summary": "Endpoint API",
+        "operationId": "get_infromation_list_features",
+        "tags": [
+          "Server"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    },
+    "/runtime": {
+      "get": {
+        "summary": "Get Info Runtime",
+        "operationId": "get_info_info_rtm",
+        "tags": [
+          "Server"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    },
+    "/os": {
+      "get": {
+        "summary": "Get Info OS",
+        "operationId": "get_info_info_os",
+        "tags": [
+          "Server"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    },
+    "/ip": {
+      "get": {
+        "summary": "Get Info Client IP",
+        "operationId": "get_info_info_client_ip",
+        "tags": [
+          "Server"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    },
+    "/cpu": {
+      "get": {
+        "summary": "Get Info Cpu",
+        "operationId": "get_info_info_cpu",
+        "tags": [
+          "Server"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestResponse"
+          }
+        }
+      }
+    }
+  }
+}
